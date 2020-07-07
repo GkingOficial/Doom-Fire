@@ -99,7 +99,3 @@ void CalculateIntensity(int index){
     intensity = fire_array[new_index] - decay >= 0 ? fire_array[new_index] - decay : 0;
     fire_array[index - decay] = intensity;
 }
-
-
-
-
