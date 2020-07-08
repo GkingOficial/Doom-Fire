@@ -20,7 +20,7 @@ void CalculatePropagation();
 void CalculateIntensity(int );
 void RenderFire();
 void CreateFireSource();
-
+void DrawBackground();
 
 int main(){
     puts("");
@@ -29,7 +29,8 @@ int main(){
     
     CreateFireSource();
     
-    printf("\033[H\033[J");
+    DrawBackground();
+    
     RenderFire();
     
     while(true) {
@@ -57,6 +58,18 @@ void CalculatePropagation(){
     RenderFire();
 }
 
+void DrawBackground(){
+    int i, j, r = fire_array[0], g = fire_array[1], b = fire_array[1];
+    printf("\033[H\033[J");
+    for(i = 0; i < fire_height; i++){
+        for(j = 0; j < fire_width; j++){
+            printf("\033[%d;%dH\033[48;2;%d;%d;%dm \033[0m", i, j, r, g, b);
+        }
+        puts("");
+    }
+    puts("");
+}
+
 void RenderFire(){
     int i, j, r, g, b;
     printf("\033[H");
@@ -67,10 +80,8 @@ void RenderFire(){
             g = fire_color[fire_array[j + fire_width * i]][1];
             b = fire_color[fire_array[j + fire_width * i]][2];
             
-            if(fire_array[j + fire_width * i] != fire_copy[j + fire_width * i]){
-                printf("\033[%d;%dH", i, j);
-                
-                printf("\033[48;2;%d;%d;%dm \033[0m", r, g, b);
+            if(fire_array[j + fire_width * i] != fire_copy[j + fire_width * i] || fire_copy[j + fire_width * i]){
+                printf("\033[%d;%dH\033[48;2;%d;%d;%dm \033[0m", i, j, r, g, b);
                 fire_copy[j + fire_width * i] = fire_array[j + fire_width * i];
             }
         }
