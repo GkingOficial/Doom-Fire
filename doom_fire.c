@@ -5,9 +5,8 @@
 #include <math.h>
 #include <time.h>
 
-#define fire_height 35
-#define fire_width 65
-#define DEBUG true
+#define fire_height 30
+#define fire_width 60
 #define INTENSITY 5
 
 const int fire_lenght = fire_height * fire_width;
